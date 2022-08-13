@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import getStyle from '../styles/tasks';
+import {getContainerStyle, getTextStyle} from '../styles/tasks';
 
 
 class Task extends Component
@@ -15,8 +15,6 @@ class Task extends Component
         this.state.text = this.props.text;
 
         this.state.status = this.props.status;
-
-        this.state.style = getStyle(this.props.status);
     }
 
 
@@ -24,8 +22,8 @@ class Task extends Component
     {
 
         return (
-            <View style={this.state.style.container}>
-                <Text style={this.state.style.text}>{this.state.text}</Text>
+            <View style={getContainerStyle(this.state.status)}>
+                <Text style={getTextStyle(this.state.status)}>{this.state.text}</Text>
             </View>
         );
 

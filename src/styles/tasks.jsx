@@ -5,36 +5,58 @@ const doneBackground = '#5f9ea0'; //Laurel green
 const InProgressBackground = '#FFFACD';
 const NotStartedBackground = '#cb4154'; //Brick red
 
-const DONE = 2;
-const INPROGRESS = 1;
+const FINISHED = 2;
+const STARTED = 1;
+const NOTSTARTED = 0;
 
-//Returns the style of a task according to its state
-export default function getStyle (taskState) {
-    let style = {
+const style = StyleSheet.create(
+    {
         container: {
             flex: 1/5,
-            backgroundColor: NotStartedBackground,
             borderWidth: 3,
             borderColor: '#232b2b',
             justifyContent: 'center',
             alignItems: 'center',
+            borderRadius: 40,
+            margin: 1,
         },
         text: {
-            margin: 5,
             fontSize: 16,
             fontWeight: 'bold',
+        },
+
+        notStarted: {
+            backgroundColor: NotStartedBackground,
+        },
+
+        inProgress: {
+            backgroundColor: InProgressBackground,
+        },
+
+        finished: {
+            backgroundColor: doneBackground,
         }
-    };
-
-    if (taskState === INPROGRESS)
-    {
-        style.container.backgroundColor = InProgressBackground;
     }
+)
 
-    if (taskState === DONE)
-    {
-        style.container.backgroundColor = doneBackground;
-    }
-
-    return StyleSheet.create(style);
+//Returns the style of the container
+export function getContainerStyle (status)
+{
+    let finalStyle = [
+        style.container,
+        status === NOTSTARTED && style.notStarted,
+        status === STARTED && style.inProgress,
+        status === FINISHED && style.finished
+    ]
+    return finalStyle;
 }
+
+//Returns the style of a task according to its state
+export function getTextStyle (status) {
+    
+    let finalStyle = [
+        style.text
+    ]
+
+    return finalStyle;
+}   

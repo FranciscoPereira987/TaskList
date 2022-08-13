@@ -15,6 +15,34 @@ const MenuStyle = StyleSheet.create({
     }
 })
 
+const NewTaskButton = StyleSheet.create({
+    button: {
+        backgroundColor: '#5f9ea0',
+        borderWidth: 1,
+        borderRadius: 6,
+        margin: 5,
+        borderColor: '#5f9ea0',
+        flex: 1/2,
+        alignItems: 'center',
+        justifyContent: 'center',
+    }
+}
+)
+
+const DeleteTaskButton = StyleSheet.create({
+    button:   {
+        backgroundColor: '#cb4154',
+        borderWidth: 1,
+        borderRadius: 6,
+        margin: 5,
+        borderColor: '#cb4154',
+        flex: 1/2,
+        alignItems: 'center',
+        justifyContent: 'center'
+    }
+}
+)
+
 
 export default function getMenu()
 {
@@ -22,29 +50,13 @@ export default function getMenu()
 }
 
 
-function getButtonStyle (color)
-{
-    let thisStyle = {
-        backgroundColor: color,
-        borderWidth: 1,
-        borderRadius: 6,
-        margin: 5,
-        borderColor: color,
-        flex: 1/2,
-        alignItems: 'center',
-        justifyContent: 'center'
-    }
-
-return thisStyle;
-}
-
 export function getNewTaskButtonStyle ()
 {
-    return getButtonStyle('#5f9ea0');
+    return NewTaskButton.button;
 }
 
 
 export function getDeleteTaskButtonStyle ()
 {
-    return getButtonStyle('#cb4154');
+    return DeleteTaskButton.button;
 }

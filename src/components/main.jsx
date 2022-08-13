@@ -13,11 +13,11 @@ const Main = () => {
         <View style={{flex: 1, paddingTop: Constants.statusBarHeight, backgroundColor: '#232b2b'}}>
             <StatusBar style="auto" />
             <Menu />
-            <Task text="esto es una tarea" status={2}/>
-            <Task text="esto es una tarea" status={2}/>
-            <Task text="esto es una tarea" status={1}/>
-            <Task text="esto es una tarea" status={0}/>
-            <Task text="esto es una tarea" status={1}/>
+            <Task text="Esto es una tarea" status={2}/>
+            <Task text="Esto es una tarea" status={2}/>
+            <Task text="Esto es una tarea" status={1}/>
+            <Task text="Esto es una tarea" status={0}/>
+            <Task text="Esto es una tarea" status={1}/>
         </View>
     )
 
