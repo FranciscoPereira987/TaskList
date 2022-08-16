@@ -1,8 +1,10 @@
 import { StyleSheet } from "react-native";
+import Constants from 'expo-constants'
 
 
 const MenuStyle = StyleSheet.create({
     container: {
+        paddingTop: Constants.statusBarHeight,
         margin: 2,
         flex: 1/10,
         flexDirection: 'row',
@@ -12,6 +14,17 @@ const MenuStyle = StyleSheet.create({
     font: {
         fontSize: 16,
         fontWeight: 'bold'
+    },
+
+    backButton: {
+        backgroundColor: '#5f9ea0',
+        borderWidth: 1,
+        borderRadius: 6,
+        margin: 5,
+        borderColor: '#5f9ea0',
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
     }
 })
 

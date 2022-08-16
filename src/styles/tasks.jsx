@@ -12,7 +12,8 @@ const NOTSTARTED = 0;
 const style = StyleSheet.create(
     {
         container: {
-            flex: 1/5,
+            minHeight: 150,
+            flex: 1,
             borderWidth: 3,
             borderColor: '#232b2b',
             justifyContent: 'center',
