@@ -8,7 +8,7 @@ const AddTaskButton = (props) =>
     return (
         <Link to={props.to} component={TouchableNativeFeedback} style={getNewTaskButtonStyle()} onPress={props.callback}>
             <View>
-                <Text style={props.font}>Nueva Tarea</Text>
+                <Text style={props.font}>{props.text}</Text>
             </View>
         </Link>
     )
@@ -46,28 +46,29 @@ class Menu extends Component
         this.state = {};
 
         this.state.style = getMenu();
-        
-        this.state.screen = this.props.screen;
 
-        this.handleScreenChange = this.handleScreenChange.bind(this);
+        this.handleScreenChange = this.props.callback;
     }
 
-    handleScreenChange()
+    getMenuType(screen, props)
     {
-        let new_screen = !this.state.screen.main;
+        if (screen === 1)
+        {
+            return (<AddReturnButton to={props.root} font={this.state.style.font} callback={this.handleScreenChange}/>);
+        }
 
-        this.setState({screen: {'main': new_screen}})
+        return (
+            <React.Fragment>
+                <AddTaskButton to={props.add} font={this.state.style.font} callback={this.handleScreenChange} text={this.props.text}/>
+                <AddDeleteButton to={props.delete} font={this.state.style.font} callback={this.handleScreenChange}/>
+            </React.Fragment>
+        )
     }
 
     render()
     {
         return (<View style={this.state.style.container}>
-            {this.state.screen.main ? (
-            <React.Fragment>
-            <AddTaskButton to='/add' font={this.state.style.font} callback={this.handleScreenChange}/>
-            <AddDeleteButton to='/delete' font={this.state.style.font} callback={this.handleScreenChange}/>
-            </React.Fragment>) : 
-            (<AddReturnButton to='/' font={this.state.style.font} callback={this.handleScreenChange}/>)}
+            {this.getMenuType(this.props.screen, this.props)}
         </View>)
     }
 }

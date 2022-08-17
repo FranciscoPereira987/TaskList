@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableNativeFeedback, View } from 'react-native';
 import {getContainerStyle, getTextStyle} from '../styles/tasks';
 
 
@@ -12,19 +12,27 @@ class Task extends Component
 
         this.state = {};
 
-        this.state.text = this.props.text;
+        this.state.task = props.task;
 
-        this.state.status = this.props.status;
+        this.state.number = props.id;
+
+        this.handleClick = this.handleClick.bind(this);
     }
 
+    handleClick()
+    {
+        this.props.callback(this.state.number);
+    }
 
     render()
     {
 
         return (
-            <View style={getContainerStyle(this.state.status)}>
-                <Text style={getTextStyle(this.state.status)}>{this.state.text}</Text>
-            </View>
+            <TouchableNativeFeedback onPress={this.handleClick}>
+                <View style={getContainerStyle(this.state.task.status)}>
+                    <Text style={getTextStyle(this.state.task.status)}>{this.state.task.title}</Text>
+                </View>
+            </TouchableNativeFeedback>
         );
 
     }

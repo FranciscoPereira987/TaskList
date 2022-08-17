@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import Constants from 'expo-constants'
-
+import Theme from "./theme";
 
 const MenuStyle = StyleSheet.create({
     container: {
@@ -8,53 +8,17 @@ const MenuStyle = StyleSheet.create({
         margin: 2,
         flex: 1/10,
         flexDirection: 'row',
-        backgroundColor: '#232b2b'
+        backgroundColor: Theme.background.primary
     },
 
-    font: {
-        fontSize: 16,
-        fontWeight: 'bold'
-    },
+    font: [Theme.font.primaryAttributes, {color: Theme.font.primary}],
 
-    backButton: {
-        backgroundColor: '#5f9ea0',
-        borderWidth: 1,
-        borderRadius: 6,
-        margin: 5,
-        borderColor: '#5f9ea0',
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-    }
+    backButton: [Theme.container.buttonContainer, {backgroundColor: Theme.buttons.add, borderColor: Theme.buttons.add, flex: 1}]
 })
 
-const NewTaskButton = StyleSheet.create({
-    button: {
-        backgroundColor: '#5f9ea0',
-        borderWidth: 1,
-        borderRadius: 6,
-        margin: 5,
-        borderColor: '#5f9ea0',
-        flex: 1/2,
-        alignItems: 'center',
-        justifyContent: 'center',
-    }
-}
-)
+const NewTaskButton = [Theme.container.buttonContainer, {backgroundColor: Theme.buttons.add, borderColor: Theme.buttons.add}]
 
-const DeleteTaskButton = StyleSheet.create({
-    button:   {
-        backgroundColor: '#cb4154',
-        borderWidth: 1,
-        borderRadius: 6,
-        margin: 5,
-        borderColor: '#cb4154',
-        flex: 1/2,
-        alignItems: 'center',
-        justifyContent: 'center'
-    }
-}
-)
+const DeleteTaskButton = [Theme.container.buttonContainer, {backgroundColor: Theme.buttons.delete, borderColor: Theme.buttons.delete}]
 
 
 export default function getMenu()
@@ -65,11 +29,11 @@ export default function getMenu()
 
 export function getNewTaskButtonStyle ()
 {
-    return NewTaskButton.button;
+    return NewTaskButton;
 }
 
 
 export function getDeleteTaskButtonStyle ()
 {
-    return DeleteTaskButton.button;
+    return DeleteTaskButton;
 }

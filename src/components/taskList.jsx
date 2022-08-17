@@ -1,40 +1,34 @@
 import React from "react";
-import { FlatList} from "react-native";
+import { FlatList, View, Text} from "react-native";
 import Task from './task'
 
-const tasks = [
-    {
-        text: "Esto es una tarea",
-        status: 2,
-    },
-    {
-        text: "Esto es una tarea",
-        status: 2,
-    },
-    {
-        text: "Esto es una tarea",
-        status: 1,
-    },
-    {
-        text: "Esto es una tarea",
-        status: 0,
-    },
-    {
-        text: "Esto es una tarea",
-        status: 1,
-    },
 
-];
-
-export default function Tasks ()
+function TaskListView (props)
 {
     return (
         <FlatList
             style={{flex: 1, flexGrow: 1, flexDirection: 'column'}}
-            data = {tasks}
+            data = {props.tasks.tasks}
             renderItem={
-                ({item: props}) => (<Task {...props}/>)
+                (item) => (<Task task={item.item} id={item.index} callback={props.callback}/>)
             }
         />
     )
+
+}
+
+function TaskSelectedView (props)
+{
+    return (<View>
+                <Text>Seleccionaste una tarea</Text>
+            </View>)
+}
+
+export default function Tasks (props)
+{
+    if (props.selection >= 0)
+    {
+        return TaskSelectedView(props);
+    }
+    return TaskListView(props);   
 }
