@@ -1,5 +1,8 @@
 import React from "react";
 import { FlatList, View, Text} from "react-native";
+import { getTaskColor } from "../styles/tasks";
+import { TextView, TittleView } from "./addView";
+import { TaskMenu } from "./menu";
 import Task from './task'
 
 
@@ -19,8 +22,11 @@ function TaskListView (props)
 
 function TaskSelectedView (props)
 {
-    return (<View>
-                <Text>Seleccionaste una tarea</Text>
+    let task = props.tasks.getTaskSelected();
+    return (<View style={{flex: 9/10}}>
+                {TittleView(props, task, getTaskColor(task.status))}
+                {TextView(props, task)}
+                {TaskMenu(task)}
             </View>)
 }
 

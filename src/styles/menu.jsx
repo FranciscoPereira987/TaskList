@@ -26,6 +26,10 @@ export default function getMenu()
     return MenuStyle;
 }
 
+export function getCustomBackground(backgroundCustom)
+{
+    return [Theme.container.buttonContainer, {backgroundColor: backgroundCustom, borderColor: backgroundCustom}]
+}
 
 export function getNewTaskButtonStyle ()
 {

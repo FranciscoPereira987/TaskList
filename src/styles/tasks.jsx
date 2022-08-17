@@ -21,7 +21,7 @@ const style = StyleSheet.create(
     }
 )
 
-function getTaskColor (status)
+export function getTaskColor (status)
 {
     return (status === NOTSTARTED && Theme.background.notStarted) || (status === STARTED && Theme.background.inProgress) || Theme.background.done;
 }
@@ -50,4 +50,18 @@ export function getTextStyle (status) {
     ]
 
     return finalStyle;
-}   
+}
+
+//Returns the options for the task depending on its status
+export function getContainersStyle (status)
+{   
+    let containers = [];
+    switch (status)
+    {
+        case 0: containers.push([getTaskColor(1), 'En Proceso']); containers.push([getTaskColor(2), 'Terminada']); break;
+        case 1: containers.push([getTaskColor(0), 'Sin Empezar']); containers.push([getTaskColor(2), 'Terminada']); break;
+        case 2: containers.push([getTaskColor(0), 'Sin Empezar']); containers.push([getTaskColor(1), 'En Proceso']); break;
+    }
+
+    return containers;
+}

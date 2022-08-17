@@ -2,14 +2,25 @@ import {TouchableNativeFeedback, View, Text} from 'react-native';
 import getMenu, {getNewTaskButtonStyle, getDeleteTaskButtonStyle} from '../styles/menu'; 
 import { Link } from 'react-router-native';
 
-const GenerateButton = (props, styling) => 
+const GenerateButton = (props, styling, key=0) => 
 {
     return (
-        <Link to={props.to} component={TouchableNativeFeedback} style={styling} onPress={props.callback}>
+        <Link key={key} to={props.to} component={TouchableNativeFeedback} style={styling} onPress={props.callback}>
             <View>
                 <Text style={props.font}>{props.text}</Text>
             </View>
         </Link>
+    )
+}
+
+export const SimpleButton = (props, styling, key=0) =>
+{
+    return (
+        <TouchableNativeFeedback key={key} onPress={props.callback}>
+            <View style={styling}>
+                <Text style={props.font}>{props.text}</Text>
+            </View>
+        </TouchableNativeFeedback>
     )
 }
 
@@ -62,8 +73,8 @@ class MainScreen
         };
 
         let buttons = [
-            GenerateButton(left_props, getNewTaskButtonStyle()),
-            GenerateButton(right_props, getDeleteTaskButtonStyle()),
+            GenerateButton(left_props, getNewTaskButtonStyle(), 0),
+            GenerateButton(right_props, getDeleteTaskButtonStyle(), 1),
         ];
 
         return buttons;
@@ -117,8 +128,12 @@ class TaskSelectedScreen
         let getCallback = (whom) => 
         {
             let wrapper = () => {
+                if (whom === 1)
+                {
+                    this.taskManager.deleteSelected();
+                }
                 this.taskManager.handleUnselect()
-                callback(whom)
+                callback(0)
             }
 
             return wrapper;
@@ -142,8 +157,8 @@ class TaskSelectedScreen
         };
 
         let buttons = [
-            GenerateButton(left_props, getNewTaskButtonStyle()),
-            GenerateButton(right_props, getDeleteTaskButtonStyle()),
+            GenerateButton(left_props, getNewTaskButtonStyle(), 0),
+            GenerateButton(right_props, getDeleteTaskButtonStyle(), 1),
         ];
 
         return buttons;

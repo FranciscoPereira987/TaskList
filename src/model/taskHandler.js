@@ -36,13 +36,27 @@ export default class TaskHandler
 
     handleDelete(taskNumber)
     {
-        this.tasks = consumeIterator(this.tasks.entries()).filter(([index, value]) => (index !== taskNumber)).map(([index, value]) => (value));
+        this.tasks = consumeIterator(this.tasks.entries()).
+                                                            filter(([index, _]) => (index !== taskNumber)).
+                                                            map(([_, value]) => (value));
     }
     
+    deleteSelected()
+    {
+        if (this.selected !== -1)
+        {
+            this.handleDelete(this.selected);
+        }
+    }
 
     handleUnselect()
     {
         this.selected = -1;
+    }
+
+    getTaskSelected()
+    {
+        return this.tasks[this.selected];
     }
 
 }

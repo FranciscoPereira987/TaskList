@@ -33,9 +33,10 @@ class Main extends Component {
         this.handlerNewTask = this.handlerNewTask.bind(this);
         this.handlerTaskClicked = this.handlerTaskClicked.bind(this);
         this.handlerTaskPoped = this.handlerTaskPoped.bind(this);
+        this.handlerTaskStatusChange = this.handlerTaskStatusChange.bind(this);
 
         this.state.addManager.set(this.handlerNewTask);
-        this.state.tasks.addTask(new Task('Prueba', 'prueba'));
+        this.state.tasks.addTask(new Task('Prueba', 'prueba', this.handlerTaskStatusChange));
 
     }
 
@@ -46,9 +47,14 @@ class Main extends Component {
         this.setState(this.state)
     }
 
+    handlerTaskStatusChange()
+    {
+        this.setState(this.state);
+    }
+
     handlerNewTask(task)
     {
-        this.state.tasks.addTask(new Task(task.title, task.text));
+        this.state.tasks.addTask(new Task(task.title, task.text, this.handlerTaskStatusChange));
         this.changeScreen(0);
 
         this.setState(this.state)
@@ -87,7 +93,7 @@ class Main extends Component {
                 <StatusBar style="auto" />
                 <Menu callback={this.handleScreenChange} screen={this.state.screen}/>
                 <Routes>
-                    <Route path='/' element={<Tasks tasks={this.state.tasks} selection={this.state.tasks.selected} callback={this.handlerTaskClicked}/>} />
+                    <Route path='/' element={<Tasks isTextOnly={true} tasks={this.state.tasks} selection={this.state.tasks.selected} callback={this.handlerTaskClicked}/>} />
                     <Route path='/add' element={<AddView manager={this.state.addManager}/>} />
                     <Route path='/delete' element={<DeleteView tasks={this.state.tasks} selection={this.state.tasks.selected} callback={this.handlerTaskPoped}/>} />
                 </Routes>
