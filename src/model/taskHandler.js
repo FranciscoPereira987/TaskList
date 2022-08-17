@@ -1,3 +1,15 @@
+const consumeIterator = (iterator) => 
+{
+    let finalResult = [];
+    let result = undefined;
+    do{
+        result = iterator.next();
+        result.done ? undefined : finalResult.push(result.value);
+    }while(!result.done)
+
+    return finalResult;
+}
+
 export default class TaskHandler
 {
     constructor()
@@ -21,6 +33,12 @@ export default class TaskHandler
     {
         this.selected = taskNumber;
     }
+
+    handleDelete(taskNumber)
+    {
+        this.tasks = consumeIterator(this.tasks.entries()).filter(([index, value]) => (index !== taskNumber)).map(([index, value]) => (value));
+    }
+    
 
     handleUnselect()
     {
